@@ -1,20 +1,26 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Modal } from 'react-native';
+import React, { useState } from 'react';
 import About from '../components/shopDetail/About';
 import { Divider } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from 'react-native-vector-icons';
+import ModalPayment from '../components/modal/ModalPayment';
 
 export default function ShopDetail({ route }) {
     const { product } = route.params;
     const navigation = useNavigation();
+    const [showModal, setShowModal] = useState(false);
 
     const handleGoBack = () => {
         navigation.navigate('Home');
     };
 
     const handleBuy = () => {
-        console.log('Achat effectué !');
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
     };
 
     return (
@@ -26,6 +32,9 @@ export default function ShopDetail({ route }) {
             <TouchableOpacity onPress={handleBuy} style={styles.buyButton}>
                 <Text style={styles.buyButtonText}>Acheter</Text>
             </TouchableOpacity>
+            <Modal visible={showModal} animationType="slide" onRequestClose={handleCloseModal}>
+                <ModalPayment onClose={handleCloseModal} />
+            </Modal>
         </View>
     );
 }

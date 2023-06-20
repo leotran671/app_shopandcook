@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, FlatList } from 'react-native';
 import { Divider } from 'react-native-elements';
 import BottomTabs from '../components/home/BottomTabs';
+import VectorImage from '../assets/Vector.png';
 
 const RecipeDetail = ({ route }) => {
     const { recipe } = route.params;
@@ -16,7 +17,10 @@ const RecipeDetail = ({ route }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Recette</Text>
+            <View style={styles.imageContainer}>
+                <Image source={VectorImage} style={styles.vectorImage} />
+                <Text style={styles.title}>Recette</Text>
+            </View>
             <Image source={{ uri: recipe.image_url }} style={styles.image} />
             <Text style={styles.heading}>{recipe.name}</Text>
 
@@ -47,11 +51,24 @@ const styles = StyleSheet.create({
         padding: 16,
         backgroundColor: '#fff',
     },
+    imageContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center', // Ajoutez cette ligne
+        marginBottom: 16,
+    },
+    vectorImage: {
+        width: 24,
+        height: 24,
+        marginRight: 8,
+        alignSelf: 'center', // Ajoutez cette ligne
+    },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
-        marginBottom: 16,
+        marginTop: 5,
         textAlign: 'center',
+        alignSelf: 'center', // Ajoutez cette ligne
     },
     image: {
         width: '100%',
