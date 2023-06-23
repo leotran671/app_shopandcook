@@ -35,7 +35,6 @@ export default function BottomTabs() {
         >
             <Icon icon="home" onPress={handleNavigateHome} />
             <Icon icon="utensils" onPress={handleNavigateRecipe} />
-            <Icon icon="user" />
             <Icon icon="sign-out-alt" onPress={handleSignOut} />
         </View>
     );

@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     price: {
         flex: 1,
         textAlign: 'center',
-        fontSize: 14,
+        fontSize: 24,
         textDecorationLine: 'line-through',
         color: '#888',
         marginBottom: 5,
@@ -73,13 +73,13 @@ const styles = StyleSheet.create({
     priceReduced: {
         flex: 1,
         textAlign: 'center',
-        fontSize: 16,
+        fontSize: 24,
         fontWeight: 'bold',
         color: 'green',
         marginBottom: 5,
     },
     name: {
-        fontSize: 16,
+        fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 5,
         textAlign: 'left'

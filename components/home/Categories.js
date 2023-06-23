@@ -22,7 +22,14 @@ export default function Categories({ selectedCategory, onCategorySelect }) {
                         ]}
                         onPress={() => onCategorySelect(category)}
                     >
-                        <Text style={styles.categoryText}>{category}</Text>
+                        <Text
+                            style={[
+                                styles.categoryText,
+                                selectedCategory === category && styles.selectedCategoryText
+                            ]}
+                        >
+                            {category}
+                        </Text>
                     </TouchableOpacity>
                 ))}
             </ScrollView>
@@ -44,9 +51,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     selectedCategory: {
-        backgroundColor: '#045E38',
+        borderColor: '#045E38',
     },
     categoryText: {
         fontSize: 16,
+    },
+    selectedCategoryText: {
+        color: '#045E38',
+        fontWeight: 'bold',
     },
 });

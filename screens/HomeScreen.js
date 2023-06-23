@@ -18,13 +18,6 @@ export default function HomeScreen() {
     return (
         <SafeAreaView style={{ backgroundColor: "#F6F5F8", flex: 1 }}>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View>
-                    <ImageBackground
-                        source={require('../assets/Fichier 11 1.png')}
-                    >
-                        <Search />
-                    </ImageBackground>
-                </View>
                 <Categories
                     selectedCategory={selectedCategory}
                     onCategorySelect={handleCategorySelect}

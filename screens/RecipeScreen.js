@@ -30,7 +30,9 @@ export default function RecipeScreen({ navigation }) {
             return;
         }
 
-        const selectedIngredients = enteredIngredients.split(',').map((ingredient) => ingredient.trim().toLowerCase());
+        const selectedIngredients = normalize(enteredIngredients)
+            .split(',')
+            .map((ingredient) => ingredient.trim().toLowerCase());
 
         const recipesRef = collection(db, 'recette');
         const querySnapshot = await getDocs(recipesRef);
@@ -41,8 +43,14 @@ export default function RecipeScreen({ navigation }) {
                 ...doc.data(),
             }))
             .filter((recipe) => {
-                const recipeIngredients = recipe.ingredients.split(',').map((ingredient) => ingredient.trim().toLowerCase());
-                return selectedIngredients.every((ingredient) => recipeIngredients.includes(ingredient));
+                const recipeIngredients = recipe.ingredients
+                    .split(',')
+                    .map((ingredient) => normalize(ingredient.trim().toLowerCase()));
+                return selectedIngredients.every((ingredient) =>
+                    recipeIngredients.some((recipeIngredient) =>
+                        recipeIngredient.includes(ingredient)
+                    )
+                );
             });
 
         setSearchResults(matchingRecipes);
@@ -50,6 +58,10 @@ export default function RecipeScreen({ navigation }) {
 
     const handleRecipeSelect = (recipe) => {
         navigation.navigate('RecipeDetail', { recipe });
+    };
+
+    const normalize = (str) => {
+        return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     };
 
     return (
@@ -61,7 +73,7 @@ export default function RecipeScreen({ navigation }) {
                 </Text>
                 <TextInput
                     style={styles.input}
-                    placeholder="Enter ingredients separated by comma"
+                    placeholder="Entrez les ingrédients séparés par des virgules"
                     onChangeText={(text) => setEnteredIngredients(text)}
                     value={enteredIngredients}
                 />

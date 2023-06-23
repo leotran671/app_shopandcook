@@ -53,10 +53,10 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     buyButton: {
-        backgroundColor: 'green',
+        backgroundColor: '#045E38',
         paddingVertical: 10,
         paddingHorizontal: 20,
-        borderRadius: 5,
+        borderRadius: 20,
         alignSelf: 'center',
         marginTop: 20,
     },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, FlatList } from 'react-native';
+import { View, Text, Image, StyleSheet, FlatList, ScrollView } from 'react-native';
 import { Divider } from 'react-native-elements';
 import BottomTabs from '../components/home/BottomTabs';
 import VectorImage from '../assets/Vector.png';
@@ -21,25 +21,25 @@ const RecipeDetail = ({ route }) => {
                 <Image source={VectorImage} style={styles.vectorImage} />
                 <Text style={styles.title}>Recette</Text>
             </View>
-            <Image source={{ uri: recipe.image_url }} style={styles.image} />
-            <Text style={styles.heading}>{recipe.name}</Text>
+            <ScrollView>
+                <Image source={{ uri: recipe.image_url }} style={styles.image} />
+                <Text style={styles.heading}>{recipe.name}</Text>
 
-            <View style={styles.panel}>
-                <Text style={styles.subheading}>Ingrédients du panier</Text>
-                <Text style={styles.text}>{recipe.ingredients}</Text>
-            </View>
+                <View style={styles.panel}>
+                    <Text style={styles.subheading}>Ingrédients du panier</Text>
+                    <Text style={styles.text}>{recipe.ingredients}</Text>
+                </View>
 
-            <View style={styles.panel}>
-                <Text style={styles.subheading}>Instructions de la recette</Text>
-                <FlatList
-                    data={instructions}
-                    renderItem={renderStepItem}
-                    keyExtractor={(item, index) => index.toString()}
-                />
-            </View>
-
+                <View style={styles.panel}>
+                    <Text style={styles.subheading}>Instructions de la recette</Text>
+                    <FlatList
+                        data={instructions}
+                        renderItem={renderStepItem}
+                        keyExtractor={(item, index) => index.toString()}
+                    />
+                </View>
+            </ScrollView>
             <Divider width={1} />
-
             <BottomTabs />
         </View>
     );
@@ -48,27 +48,28 @@ const RecipeDetail = ({ route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingBottom: 0,
         padding: 16,
         backgroundColor: '#fff',
     },
     imageContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center', // Ajoutez cette ligne
+        justifyContent: 'center',
         marginBottom: 16,
     },
     vectorImage: {
         width: 24,
         height: 24,
         marginRight: 8,
-        alignSelf: 'center', // Ajoutez cette ligne
+        alignSelf: 'center',
     },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
         marginTop: 5,
         textAlign: 'center',
-        alignSelf: 'center', // Ajoutez cette ligne
+        alignSelf: 'center',
     },
     image: {
         width: '100%',
